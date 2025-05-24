@@ -7,4 +7,4 @@ echo "$Greeting"
 
 echo "PID of scrip-1 $$"
 
-./script-2
+source ./script-2
