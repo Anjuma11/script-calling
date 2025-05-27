@@ -1,13 +1,9 @@
 #!/bin/bash
 
 source ./commonscript
-
 app_name=mongodb
 
-# check the user has root priveleges or not
 check_root
-# validate functions takes input as exit status, what command they tried to install
-
 
 cp mongo.repo /etc/yum.repos.d/mongodb.repo
 VALIDATE $? "Copying MongoDB repo"
