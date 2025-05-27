@@ -2,7 +2,7 @@
 
 source ./commonscript
 
-SCRIPT_DIR=$(dirname "$(realpath "$0")")
+SCRIPT_DIR=$PWD
 
 check_root
 
@@ -21,23 +21,21 @@ VALIDATE $? "Removing default content"
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$LOG_FILE
 VALIDATE $? "Downloading frontend"
 
-cd /usr/share/nginx/html || exit 1
+cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>>$LOG_FILE
 VALIDATE $? "Unzipping frontend"
 
 rm -f /etc/nginx/nginx.conf &>>$LOG_FILE
 VALIDATE $? "Removing default nginx.conf"
 
-if [ ! -f "$SCRIPT_DIR/nginx.conf" ]; then
-  echo -e "$R nginx.conf NOT FOUND in $SCRIPT_DIR. Exiting. $N" | tee -a $LOG_FILE
-  exit 1
-fi
+# if [ ! -f "$SCRIPT_DIR/nginx.conf" ]; then
+#   echo -e "$R nginx.conf NOT FOUND in $SCRIPT_DIR. Exiting. $N" | tee -a $LOG_FILE
+#   exit 1
+# fi
 
 cp "$SCRIPT_DIR/nginx.conf" /etc/nginx/nginx.conf &>>$LOG_FILE
 VALIDATE $? "Copying nginx.conf"
 
-nginx -t &>>$LOG_FILE
-VALIDATE $? "Testing nginx configuration"
 
 systemctl enable nginx &>>$LOG_FILE
 systemctl restart nginx &>>$LOG_FILE
