@@ -1,5 +1,5 @@
 #!/bin/bash
-START_TIME=$(date + %s)
+START_TIME=$(date +%s)
 
 USERID=$(id -u)
 R="\e[31m"
@@ -36,7 +36,7 @@ VALIDATE(){
 }
 
 print_time(){
-    END_TIME=$(date + %s)
+    END_TIME=$(date +%s)
     total_time=$(( $END_TIME - $START_TIME))
     echo -e "Script executed successfully, $Y time taken: $total_time seconds $N"
 }
