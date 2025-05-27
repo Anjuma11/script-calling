@@ -2,8 +2,6 @@
 
 
 source ./commonscript
-app_name=frontend
-
 check_root
 
 dnf module disable nginx -y &>>$LOG_FILE
